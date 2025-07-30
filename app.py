@@ -1148,23 +1148,28 @@ def hello():
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
     logger.info(f"收到 {request.method} 請求到 webhook")
+    
+    # 處理 GET 請求（LINE Platform 的通信確認）
     if request.method == 'GET':
-        return "Webhook 正常運行"
+        return "Webhook 正常運行", 200
 
+    # 處理 POST 請求
     signature = request.headers.get('X-Line-Signature', '')
     body = request.get_data(as_text=True)
     logger.info(f"收到 POST 請求，簽名: {signature[:20]}...")
     logger.info(f"請求體: {body[:200]}...")
 
     try:
+        # 處理 LINE Platform 的請求
         handler.handle(body, signature)
-        return 'OK'
+        logger.info("成功處理 webhook 請求")
+        return 'OK', 200
     except InvalidSignatureError as e:
         logger.error(f"簽名驗證失敗: {e}")
-        abort(400)
+        return 'Invalid signature', 400
     except Exception as e:
         logger.error(f"處理 webhook 時發生錯誤: {e}")
-        abort(500)
+        return 'Internal server error', 500
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
