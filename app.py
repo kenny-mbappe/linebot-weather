@@ -8,6 +8,9 @@ from linebot.models import (
     FlexSendMessage, BubbleContainer, BoxComponent, TextComponent,
     ButtonComponent, SeparatorComponent, FollowEvent
 )
+import warnings
+# 忽略棄用警告
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 import logging
 import requests
 import urllib.parse
@@ -1702,4 +1705,4 @@ if __name__ == "__main__":
     logger.info("Webhook URL: http://localhost:5000/webhook")
     logger.info("當用戶輸入「你好」時，Bot 會顯示主選單")
     
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)
