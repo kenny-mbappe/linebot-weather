@@ -1701,8 +1701,10 @@ def handle_follow(event):
     )
 
 if __name__ == "__main__":
-    logger.info("LINE Bot 伺服器正在運行，端口: 5000")
-    logger.info("Webhook URL: http://localhost:5000/webhook")
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    logger.info(f"LINE Bot 伺服器正在運行，端口: {port}")
+    logger.info(f"Webhook URL: http://localhost:{port}/webhook")
     logger.info("當用戶輸入「你好」時，Bot 會顯示主選單")
     
     app.run(host='0.0.0.0', port=port, debug=False)
