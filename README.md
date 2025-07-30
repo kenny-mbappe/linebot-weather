@@ -31,7 +31,9 @@ npm start
 
 Bot 已經配置了您的 LINE Channel Token 和 Secret。伺服器將在端口 5000 上運行。
 
-## Webhook 設置
+### 天氣 API 設置
+1. 申請中央氣象局 API 金鑰
+2. 在代碼中更新 API 金鑰
 
 1. 啟動 ngrok：
 ```bash
