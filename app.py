@@ -8,9 +8,6 @@ from linebot.models import (
     FlexSendMessage, BubbleContainer, BoxComponent, TextComponent,
     ButtonComponent, SeparatorComponent, FollowEvent
 )
-import warnings
-# 忽略棄用警告
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 import logging
 import requests
 import urllib.parse
